@@ -49,22 +49,31 @@ export function clamp(value: number, min: number, max: number): number {
 }
 
 /**
- * Validate an IP address or hostname format
+ * Validate an IP address or hostname format (supports ports and optional http://)
  */
 export function isValidIpOrHostname(value: string): boolean {
+  if (!value || !value.trim()) return false;
+  // Strip http:// or https:// and trailing slashes
+  const cleaned = value.trim().replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+  const [host, port] = cleaned.split(':');
+
+  if (port) {
+    const portNum = parseInt(port, 10);
+    if (isNaN(portNum) || portNum < 1 || portNum > 65535) return false;
+  }
+
   // Simple IP v4 pattern
   const ipPattern = /^(\d{1,3}\.){3}\d{1,3}$/;
-  // Hostname pattern
+  // Hostname pattern (e.g. localhost, aeropersona.local)
   const hostnamePattern = /^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*$/;
 
-  if (ipPattern.test(value)) {
-    // Validate each octet is 0-255
-    return value.split('.').every((octet) => {
+  if (ipPattern.test(host)) {
+    return host.split('.').every((octet) => {
       const num = parseInt(octet, 10);
       return num >= 0 && num <= 255;
     });
   }
-  return hostnamePattern.test(value);
+  return hostnamePattern.test(host);
 }
 
 /**
