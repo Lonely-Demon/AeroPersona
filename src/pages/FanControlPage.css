@@ -1,0 +1,500 @@
+/* ============================================================================
+   AeroPersona – Fan Control Page Styles
+   Core fan control interface with power, speed, mode, and connection status
+   ============================================================================ */
+
+/* ---- Page Layout ---- */
+.fan-control-page {
+  animation: fadeIn var(--transition-base) ease forwards;
+}
+
+/* ---- Power Section ---- */
+.power-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-xl) 0;
+}
+
+.power-button {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--border-primary);
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  outline: none;
+  user-select: none;
+}
+
+.power-button:hover {
+  border-color: var(--border-secondary);
+  transform: scale(1.04);
+}
+
+.power-button:active {
+  transform: scale(0.96);
+}
+
+/* Glow ring when fan is ON */
+.power-button.power-on {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  background: rgba(59, 130, 246, 0.08);
+  box-shadow:
+    0 0 16px rgba(59, 130, 246, 0.35),
+    0 0 40px rgba(59, 130, 246, 0.15),
+    inset 0 0 12px rgba(59, 130, 246, 0.08);
+}
+
+.power-button.power-on:hover {
+  box-shadow:
+    0 0 24px rgba(59, 130, 246, 0.45),
+    0 0 56px rgba(59, 130, 246, 0.2),
+    inset 0 0 16px rgba(59, 130, 246, 0.1);
+}
+
+.power-status-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.power-status-text.is-on {
+  color: var(--accent-blue);
+}
+
+/* ---- Speed Section ---- */
+.speed-section {
+  padding: var(--space-lg) 0;
+}
+
+.speed-gauge-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+/* Circular gauge-like display for current speed */
+.speed-gauge {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      var(--accent-blue) calc(var(--speed-pct, 0) * 1%),
+      var(--bg-tertiary) calc(var(--speed-pct, 0) * 1%)
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: --speed-pct var(--transition-base);
+}
+
+/* Inner circle cutout to form a ring */
+.speed-gauge-inner {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.speed-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+.speed-unit {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Speed adjustment row: minus, display, plus */
+.speed-adjust-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.speed-step-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  outline: none;
+  flex-shrink: 0;
+}
+
+.speed-step-btn:hover:not(:disabled) {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.speed-step-btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.speed-step-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Exact speed input */
+.speed-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.speed-input {
+  width: 72px;
+  padding: 8px 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.speed-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.speed-input-suffix {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+/* Custom larger slider for speed */
+.speed-slider-container {
+  width: 100%;
+  padding: 0 var(--space-sm);
+}
+
+.speed-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  outline: none;
+  transition: background var(--transition-fast);
+}
+
+.speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  cursor: pointer;
+  border: 3px solid var(--bg-card);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-fast);
+}
+
+.speed-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: var(--shadow-glow);
+}
+
+.speed-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  cursor: pointer;
+  border: 3px solid var(--bg-card);
+  box-shadow: var(--shadow-md);
+}
+
+.speed-slider:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.speed-slider:disabled::-webkit-slider-thumb {
+  cursor: not-allowed;
+}
+
+.speed-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: var(--space-xs);
+  padding: 0 2px;
+}
+
+/* ---- Mode Selection ---- */
+.mode-section {
+  padding: var(--space-md) 0;
+}
+
+.mode-segmented {
+  display: flex;
+  background: var(--bg-input);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: 4px;
+  gap: 4px;
+}
+
+.mode-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  outline: none;
+}
+
+.mode-btn:hover:not(.mode-btn-active) {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.mode-btn-active {
+  background: var(--accent-blue);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-btn-active:hover {
+  background: var(--accent-blue-hover);
+}
+
+/* ---- Speed Decision Explanation ---- */
+.speed-decision {
+  background: rgba(59, 130, 246, 0.06);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  animation: fadeIn var(--transition-base) ease forwards;
+}
+
+.speed-decision-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  margin-bottom: var(--space-sm);
+}
+
+.speed-decision-message {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.speed-decision-users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.speed-decision-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 4px 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.speed-decision-user-speed {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+/* ---- Manual Override ---- */
+.override-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+}
+
+.override-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.override-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.override-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* ---- Connection Status Bar ---- */
+.connection-bar {
+  position: fixed;
+  bottom: 70px; /* sits just above the nav bar */
+  left: 0;
+  right: 0;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  z-index: var(--z-sticky);
+  backdrop-filter: blur(8px);
+}
+
+.connection-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.connection-label {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.connection-label.connected {
+  color: var(--status-online);
+}
+
+.connection-label.disconnected {
+  color: var(--status-offline);
+}
+
+.connection-label.connecting {
+  color: var(--status-connecting);
+}
+
+.connection-timestamp {
+  color: var(--text-tertiary);
+}
+
+/* ---- Preference Toast ---- */
+.preference-toast {
+  position: fixed;
+  bottom: 110px; /* above connection bar */
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-green);
+  color: white;
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  animation: toastSlideIn 300ms ease forwards;
+  z-index: var(--z-toast);
+  white-space: nowrap;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+  .speed-gauge {
+    width: 140px;
+    height: 140px;
+  }
+
+  .speed-gauge-inner {
+    width: 112px;
+    height: 112px;
+  }
+
+  .speed-value {
+    font-size: 2rem;
+  }
+
+  .mode-btn {
+    padding: 8px 8px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+
+  .mode-btn .mode-btn-icon {
+    display: none;
+  }
+
+  .connection-bar {
+    padding: var(--space-xs) var(--space-sm);
+  }
+}

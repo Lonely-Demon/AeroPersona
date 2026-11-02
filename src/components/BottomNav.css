@@ -1,0 +1,200 @@
+/* ============================================================================
+   AeroPersona – Bottom Navigation & Top Header Styles
+   Glass-morphism mobile-first navigation system
+   ============================================================================ */
+
+/* ---- Top Header Bar ---- */
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-md);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+  z-index: var(--z-sticky);
+  /* Safe area for notched devices */
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+[data-theme='light'] .top-header {
+  background: rgba(248, 250, 252, 0.85);
+  border-bottom-color: rgba(226, 232, 240, 0.7);
+}
+
+.top-header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.top-header-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.top-header-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.01em;
+}
+
+.top-header-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+}
+
+.top-header-status .status-dot {
+  width: 7px;
+  height: 7px;
+}
+
+/* ---- Bottom Navigation Bar ---- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(51, 65, 85, 0.5);
+  z-index: var(--z-sticky);
+  /* Safe area for home-bar devices */
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+[data-theme='light'] .bottom-nav {
+  background: rgba(255, 255, 255, 0.88);
+  border-top-color: rgba(226, 232, 240, 0.7);
+}
+
+/* ---- Navigation Tab Button ---- */
+.nav-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 1;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-tertiary);
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  padding: 0;
+}
+
+.nav-tab:hover {
+  color: var(--text-secondary);
+}
+
+/* Active tab state */
+.nav-tab.active {
+  color: var(--accent-blue);
+}
+
+/* Active indicator glow line at top of tab */
+.nav-tab.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background: var(--accent-blue);
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+.nav-tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: transform var(--transition-fast);
+}
+
+.nav-tab.active .nav-tab-icon {
+  transform: scale(1.1);
+}
+
+.nav-tab-label {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ---- Spacers for fixed nav elements ---- */
+/* These ensure page content isn't hidden behind fixed bars */
+.nav-top-spacer {
+  height: 56px;
+  flex-shrink: 0;
+  /* Account for safe area */
+  height: calc(56px + env(safe-area-inset-top, 0px));
+}
+
+.nav-bottom-spacer {
+  height: 60px;
+  flex-shrink: 0;
+  /* Account for safe area */
+  height: calc(60px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---- Responsive ---- */
+@media (min-width: 769px) {
+  .bottom-nav {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-left: 1px solid rgba(51, 65, 85, 0.5);
+    border-right: 1px solid rgba(51, 65, 85, 0.5);
+  }
+
+  [data-theme='light'] .bottom-nav {
+    border-left-color: rgba(226, 232, 240, 0.7);
+    border-right-color: rgba(226, 232, 240, 0.7);
+  }
+
+  .nav-tab-label {
+    font-size: 0.6875rem;
+  }
+}

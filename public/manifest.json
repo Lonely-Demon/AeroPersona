@@ -1,0 +1,17 @@
+{
+  "name": "AeroPersona",
+  "short_name": "AeroPersona",
+  "description": "Personalized Multi-User Smart Fan by ALPZET MATRIX",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#0F172A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/aeropersona-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

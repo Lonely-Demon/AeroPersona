@@ -1,0 +1,372 @@
+/* ============================================================================
+   AeroPersona – Analytics Page Styles
+   Dashboard layout with tab navigation, chart cards, and stat badges
+   ============================================================================ */
+
+.analytics-page {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.analytics-page h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+
+.analytics-page .page-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+/* ---- Tab Navigation ---- */
+
+.analytics-tabs {
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  scrollbar-width: thin;
+}
+
+.analytics-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.analytics-tabs::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab-button:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.tab-button.active {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* ---- Chart Card ---- */
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.chart-card h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.chart-card h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.chart-container {
+  width: 100%;
+  height: 280px;
+  margin-bottom: 0.75rem;
+}
+
+/* ---- Stat Badges Row ---- */
+
+.stat-badges {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.stat-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.625rem 1rem;
+  min-width: 100px;
+}
+
+.stat-badge .stat-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.stat-badge .stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-badge .stat-value.accent {
+  color: var(--accent-color);
+}
+
+.stat-badge .stat-value.green {
+  color: #10b981;
+}
+
+.stat-badge .stat-value.yellow {
+  color: #f59e0b;
+}
+
+.stat-badge .stat-value.red {
+  color: #ef4444;
+}
+
+/* ---- Current Value Hero ---- */
+
+.current-value-display {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.current-value-display .big-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  line-height: 1;
+}
+
+.current-value-display .big-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.25rem;
+}
+
+/* ---- Empty State ---- */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-tertiary);
+  gap: 0.5rem;
+}
+
+.empty-state svg {
+  opacity: 0.4;
+}
+
+.empty-state p {
+  font-size: 0.875rem;
+}
+
+/* ---- User Preference Section ---- */
+
+.user-pref-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.user-pref-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.user-pref-header .user-icon {
+  font-size: 1.5rem;
+}
+
+.user-pref-header .user-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.user-pref-header .learning-badge {
+  margin-left: auto;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.learning-badge.insufficient {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.learning-badge.learning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.learning-badge.stable {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.user-pref-stats {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.user-pref-stats .mini-stat {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.user-pref-stats .mini-stat strong {
+  color: var(--text-primary);
+}
+
+.user-scatter-chart {
+  width: 100%;
+  height: 200px;
+}
+
+/* ---- Automation Event List ---- */
+
+.automation-event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.automation-event-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.automation-event-item:last-child {
+  border-bottom: none;
+}
+
+.automation-event-item .event-time {
+  font-size: 0.6875rem;
+  color: var(--text-tertiary);
+  font-family: monospace;
+}
+
+.automation-event-item .event-trigger {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.automation-event-item .event-action {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ---- Energy Note ---- */
+
+.energy-note {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ---- Recharts Tooltip Override ---- */
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+.recharts-default-tooltip .recharts-tooltip-label {
+  color: var(--text-secondary) !important;
+  font-size: 0.75rem !important;
+}
+
+.recharts-default-tooltip .recharts-tooltip-item {
+  color: var(--text-primary) !important;
+  font-size: 0.8125rem !important;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 640px) {
+  .analytics-page {
+    padding: 0.75rem;
+  }
+
+  .chart-container {
+    height: 220px;
+  }
+
+  .stat-badges {
+    gap: 0.5rem;
+  }
+
+  .stat-badge {
+    min-width: 80px;
+    padding: 0.5rem 0.625rem;
+  }
+
+  .stat-badge .stat-value {
+    font-size: 1.05rem;
+  }
+
+  .current-value-display .big-value {
+    font-size: 2rem;
+  }
+
+  .user-scatter-chart {
+    height: 160px;
+  }
+}
