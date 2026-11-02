@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "author": "ALPZET MATRIX",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht",
+      "top": -120,
+      "left": 180,
+      "attrs": { "temperature": "28.5", "humidity": "55" }
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir",
+      "top": 140,
+      "left": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay",
+      "top": -120,
+      "left": -180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "fanLed",
+      "top": 120,
+      "left": -160,
+      "attrs": { "color": "blue", "label": "Fan Motor PWM" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 160,
+      "left": -120,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "auxLed",
+      "top": -60,
+      "left": -240,
+      "attrs": { "color": "green", "label": "Aux Connected Device" }
+    }
+  ],
+  "connections": [
+    [ "esp:3V3", "dht:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "dht:GND", "black", [ "v0" ] ],
+    [ "esp:D4", "dht:SDA", "green", [ "v0" ] ],
+
+    [ "esp:5V", "pir:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.2", "pir:GND", "black", [ "v0" ] ],
+    [ "esp:D13", "pir:OUT", "gold", [ "v0" ] ],
+
+    [ "esp:5V", "relay:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "relay:GND", "black", [ "v0" ] ],
+    [ "esp:D5", "relay:IN", "purple", [ "v0" ] ],
+
+    [ "esp:D18", "r1:1", "blue", [ "v0" ] ],
+    [ "r1:2", "fanLed:A", "blue", [ "v0" ] ],
+    [ "esp:GND.2", "fanLed:C", "black", [ "v0" ] ],
+
+    [ "relay:NO", "auxLed:A", "orange", [ "v0" ] ],
+    [ "relay:COM", "esp:5V", "red", [ "v0" ] ],
+    [ "esp:GND.1", "auxLed:C", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
